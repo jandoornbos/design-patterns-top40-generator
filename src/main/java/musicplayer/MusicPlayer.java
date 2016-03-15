@@ -21,6 +21,9 @@ public class MusicPlayer {
     {
     }
 
+    /**
+     * Play a song.
+     */
     public void playSong()
     {
 
@@ -30,7 +33,6 @@ public class MusicPlayer {
             urlConnection.connect();
 
             player = new Player(urlConnection.getInputStream());
-
         }
         catch (Exception e)
         {
@@ -48,7 +50,7 @@ public class MusicPlayer {
 
     }
 
-    public void pause()
+    public void stopPlaying()
     {
         player.close();
     }
