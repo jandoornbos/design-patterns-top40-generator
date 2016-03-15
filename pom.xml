@@ -17,6 +17,7 @@
         </dependency>
 
         <dependency>
+
             <groupId>com.mpatric</groupId>
             <artifactId>mp3agic</artifactId>
             <version>0.8.3</version>
@@ -26,6 +27,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>1.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>javazoom</groupId>
+            <artifactId>jlayer</artifactId>
+            <version>1.0.1</version>
+
         </dependency>
 
     </dependencies>
