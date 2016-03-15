@@ -1,5 +1,7 @@
 package gui;
 
+import musicplayer.MusicPlayer;
+
 import javax.swing.*;
 
 public class StartScreen extends JFrame {
@@ -14,5 +16,8 @@ public class StartScreen extends JFrame {
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+
+        MusicPlayer.getInstance().playSong();
+
     }
 }
