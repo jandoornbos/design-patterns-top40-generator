@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.PlaylistScreen">
-  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="449"/>
+      <xy x="20" y="20" width="500" height="530"/>
     </constraints>
     <properties>
       <preferredSize width="800" height="600"/>
@@ -18,7 +18,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="4b354" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="4b354" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="25" left="25" bottom="25" right="25"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -32,37 +32,67 @@
                     <preferred-size width="150" height="300"/>
                   </grid>
                 </constraints>
-                <properties/>
-              </component>
-              <vspacer id="80682">
-                <constraints>
-                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                </constraints>
-              </vspacer>
-            </children>
-          </grid>
-          <grid id="87fdc" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="bb869" class="javax.swing.JButton" binding="addSongButton">
-                <constraints/>
                 <properties>
-                  <text value="Add song"/>
+                  <enabled value="false"/>
+                  <font size="16"/>
                 </properties>
               </component>
             </children>
           </grid>
+          <tabbedpane id="3f227" default-binding="true">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="200" height="200"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="6189d" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <tabbedpane title="Playlist"/>
+                </constraints>
+                <properties>
+                  <foreground color="-4482945"/>
+                  <name value=""/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="bb869" class="javax.swing.JButton" binding="addSongButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Add song"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="b161c" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <tabbedpane title="Exporteren"/>
+                </constraints>
+                <properties>
+                  <foreground color="-4482945"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="11e56" class="javax.swing.JButton" binding="jsonExportButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Export to JSON"/>
+                    </properties>
+                  </component>
+                  <component id="1e4f" class="javax.swing.JButton" binding="xmlExportButton">
+                    <constraints/>
+                    <properties>
+                      <text value="Export to XML"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </tabbedpane>
         </children>
       </grid>
-      <vspacer id="18fe2">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
     </children>
   </grid>
 </form>

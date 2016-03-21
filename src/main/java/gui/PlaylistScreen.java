@@ -11,6 +11,8 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     private JPanel rootPanel;
     private JList songList;
     private JButton addSongButton;
+    private JButton jsonExportButton;
+    private JButton xmlExportButton;
 
     private DefaultListModel listModel;
 
