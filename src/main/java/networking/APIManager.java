@@ -15,7 +15,7 @@ import java.util.concurrent.Future;
 public class APIManager
 {
 
-    static final String BASE_URL = "http://www.doornbosagrait.tk/top4-generator/";
+    static final String BASE_URL = "http://top40.doornbosagrait.tk/";
 
     private static APIManager sharedInstance = new APIManager();
 
@@ -41,7 +41,7 @@ public class APIManager
      */
     public void postPlaylistToWebservice() {
 
-        Future<HttpResponse<JsonNode>> request = Unirest.post(BASE_URL + "uploadPlaylist.php")
+        Future<HttpResponse<JsonNode>> request = Unirest.post(BASE_URL + "playlist/upload")
                 .asJsonAsync(new Callback<JsonNode>() {
 
                     public void completed(HttpResponse<JsonNode> httpResponse) {
