@@ -5,8 +5,8 @@ import javax.swing.*;
 public class StartScreen extends JFrame {
 
     private JPanel rootPanel;
-    private JButton dutchButton;
-    private JButton englishButton;
+    private JButton englishListButton;
+    private JButton dutchListButton;
 
     public StartScreen() {
         super("StartScreen");
