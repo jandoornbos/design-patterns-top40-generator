@@ -1,12 +1,18 @@
 package gui;
 
-import javax.swing.*;
+import model.Song;
 
-public class PlaylistScreen extends JFrame {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class PlaylistScreen extends JFrame implements AddSongInterface {
 
     private JPanel rootPanel;
     private JList songList;
     private JButton addSongButton;
+
+    private DefaultListModel listModel;
 
     public PlaylistScreen() {
 
@@ -17,16 +23,27 @@ public class PlaylistScreen extends JFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);
 
-        addDummySongs();
-    }
+        addButtonActions();
 
-    public void addDummySongs() {
-
-        DefaultListModel listModel = new DefaultListModel();
-        listModel.addElement("Song 1");
-        listModel.addElement("Song 2");
+        listModel = new DefaultListModel();
         songList.setModel(listModel);
+    }
+
+    public void addButtonActions() {
+
+        final PlaylistScreen me = this;
+        addSongButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                AddSongScreen addSongScreen = new AddSongScreen(me);
+            }
+
+        });
 
     }
 
+    public void songAdded(Song song) {
+        String songString = song.getTitle() + " - " + song.getArtist();
+        listModel.addElement(songString);
+    }
 }

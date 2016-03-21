@@ -30,7 +30,6 @@ public class StartScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 PlaylistScreen playlistScreen = new PlaylistScreen();
                 playlistScreen.setLocationRelativeTo(rootPanel);
-                playlistScreen.setVisible(true);
             }
 
         });
