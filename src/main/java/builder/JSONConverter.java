@@ -1,4 +1,7 @@
-package model;
+package builder;
+
+import model.Playlist;
+import model.Song;
 
 import java.util.ArrayList;
 

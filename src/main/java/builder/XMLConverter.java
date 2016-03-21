@@ -1,4 +1,4 @@
-package model;
+package builder;
 
 /**
  * Created by Ferdi on 15-3-2016.

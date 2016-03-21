@@ -2,9 +2,6 @@ package gui;
 
 import javax.swing.*;
 
-import model.JSONConverter;
-import model.Song;
-
 public class StartScreen extends JFrame {
 
     private JPanel rootPanel;
