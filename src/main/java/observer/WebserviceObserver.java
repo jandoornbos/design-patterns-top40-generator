@@ -1,5 +1,7 @@
 package observer;
 
+import networking.APIManager;
+
 public class WebserviceObserver implements Observer {
 
     private Subject subject;
@@ -10,7 +12,7 @@ public class WebserviceObserver implements Observer {
     }
 
     public void update() {
-        // Update webservice
+        APIManager.getInstance().postPlaylistToWebservice();
     }
 
 }

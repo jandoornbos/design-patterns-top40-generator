@@ -1,5 +1,9 @@
 package gui;
 
+import datamodel.DataModel;
+import javafx.scene.chart.PieChart;
+import model.Playlist;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,16 +27,30 @@ public class StartScreen extends JFrame {
         setupButtons();
     }
 
-    public void setupButtons() {
+    private void setupButtons() {
 
         englishListButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                PlaylistScreen playlistScreen = new PlaylistScreen();
-                playlistScreen.setLocationRelativeTo(rootPanel);
+                openPlaylistScreen(DataModel.getInstance().getEnglishPlaylist());
+            }
+
+        });
+
+        dutchListButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                openPlaylistScreen(DataModel.getInstance().getDutchPlaylist());
             }
 
         });
 
     }
+
+    private void openPlaylistScreen(Playlist playlist) {
+        PlaylistScreen playlistScreen = new PlaylistScreen();
+        playlistScreen.setCurrentPlaylist(playlist);
+        playlistScreen.setLocationRelativeTo(rootPanel);
+    }
+
 }

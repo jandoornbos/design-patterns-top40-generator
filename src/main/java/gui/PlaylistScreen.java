@@ -1,5 +1,6 @@
 package gui;
 
+import model.Playlist;
 import model.Song;
 
 import javax.swing.*;
@@ -13,8 +14,10 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     private JButton addSongButton;
     private JButton jsonExportButton;
     private JButton xmlExportButton;
+    private JLabel titleLabel;
 
     private DefaultListModel listModel;
+    private Playlist currentPlaylist;
 
     public PlaylistScreen() {
 
@@ -31,7 +34,11 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         songList.setModel(listModel);
     }
 
-    public void addButtonActions() {
+    /**
+     * Add actions to the buttons.
+     */
+    private void addButtonActions()
+    {
 
         final PlaylistScreen me = this;
         addSongButton.addActionListener(new ActionListener() {
@@ -44,8 +51,43 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
 
     }
 
-    public void songAdded(Song song) {
+    /**
+     * Fill the JList with the songs that are already in the playlist.
+     */
+    private void fillListWithPlaylist()
+    {
+        // If current playlist is set
+        if (this.currentPlaylist.getSongs().size() > 0)
+        {
+            // Loop through the songs
+            for (Song song : this.currentPlaylist.getSongs())
+            {
+                String songString = song.getTitle() + " - " + song.getArtist();
+                listModel.addElement(songString);
+            }
+        }
+    }
+
+    /**
+     * Is called from the AddSongScreen.
+     *
+     * @param song The song to be added.
+     */
+    public void songAdded(Song song)
+    {
         String songString = song.getTitle() + " - " + song.getArtist();
         listModel.addElement(songString);
     }
+
+    /**
+     * Set the current playlist for this screen.
+     * @param currentPlaylist
+     */
+    public void setCurrentPlaylist(Playlist currentPlaylist)
+    {
+        this.currentPlaylist = currentPlaylist;
+        titleLabel.setText(this.currentPlaylist.getTitle());
+        fillListWithPlaylist();
+    }
+
 }
