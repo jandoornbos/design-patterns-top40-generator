@@ -2,8 +2,8 @@ package observer;
 
 public interface Observer {
 
-    void update();
+    public void update();
 
-    void setSubject(Subject subject);
+    public void setSubject(Subject subject);
 
 }
