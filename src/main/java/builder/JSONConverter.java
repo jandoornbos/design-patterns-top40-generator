@@ -23,7 +23,8 @@ public class JSONConverter implements Converter {
 
     public Song readPlaylist()
     {
-        Playlist list = new Playlist();
+        Playlist list = new Playlist();;
+
         ArrayList<Song> showList = list.getSongs();
         Song items = null;
 

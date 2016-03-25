@@ -3,6 +3,7 @@ package gui;
 import datamodel.DataModel;
 import javafx.scene.chart.PieChart;
 import model.Playlist;
+import builder.JSONConverter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
