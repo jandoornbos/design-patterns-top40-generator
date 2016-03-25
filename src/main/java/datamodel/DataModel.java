@@ -21,7 +21,8 @@ public class DataModel {
 
         englishPlaylist = new Playlist();
         englishPlaylist.setTitle("English");
-        englishPlaylist.addSong(new Song("awef", "asdf", "asdf", "Asdf"));
+        englishPlaylist.addSong(new Song("C://", "Riddles", "Kensington", "Vultures"));
+        englishPlaylist.addSong(new Song("C://", "Zonder jou", "Marco Borsato", "Luid en Duidelijk"));
 
     }
 

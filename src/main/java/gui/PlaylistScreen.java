@@ -1,5 +1,6 @@
 package gui;
 
+import builder.XMLConverter;
 import model.Playlist;
 import model.Song;
 import builder.JSONConverter;
@@ -58,6 +59,24 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
                 ArrayList<Song> getCurrentSongs = currentPlaylist.getSongs();
                 JSONConverter converter = new JSONConverter();
                 converter.convertToJSON(getCurrentSongs);
+            }
+        });
+
+        xmlExportButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                ArrayList<Song> getCurrentSongs = currentPlaylist.getSongs();
+
+                Song songItems = null;
+
+                for (Song song : getCurrentSongs)
+                {
+                    songItems = song;
+                    XMLConverter converter = new XMLConverter();
+                    converter.convertToXML(songItems);
+                }
+
             }
         });
 

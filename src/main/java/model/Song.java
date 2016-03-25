@@ -1,17 +1,23 @@
 package model;
 
-import java.io.File;
-import com.mpatric.mp3agic.Mp3File;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
 
-/**
- * Created by Ferdi on 15-3-2016.
- */
+@XmlRootElement(name = "Song")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"fileURL", "title", "artist", "album"})
 public class Song {
     private String fileURL;
     private String title;
     private String artist;
     private String album;
 
+    public Song() {}
 
     /**
      * Constructor for adding a song
