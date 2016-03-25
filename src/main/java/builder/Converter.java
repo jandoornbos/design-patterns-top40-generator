@@ -9,6 +9,6 @@ import java.util.ArrayList;
  */
 public interface Converter
 {
-    public Song readPlaylist();
+    //public Song readPlaylist();
     public String getOutput();
 }

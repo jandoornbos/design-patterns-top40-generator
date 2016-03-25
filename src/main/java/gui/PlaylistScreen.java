@@ -2,10 +2,12 @@ package gui;
 
 import model.Playlist;
 import model.Song;
+import builder.JSONConverter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PlaylistScreen extends JFrame implements AddSongInterface {
 
@@ -49,6 +51,15 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
 
         });
 
+        jsonExportButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                ArrayList<Song> getCurrentSongs = currentPlaylist.getSongs();
+                JSONConverter converter = new JSONConverter();
+                converter.convertToJSON(getCurrentSongs);
+            }
+        });
 
     }
 
@@ -90,5 +101,4 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         titleLabel.setText(this.currentPlaylist.getTitle());
         fillListWithPlaylist();
     }
-
 }

@@ -2,6 +2,9 @@ package builder;
 
 import model.Playlist;
 import model.Song;
+import java.io.FileWriter;
+import java.io.IOException;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -21,18 +24,21 @@ public class JSONConverter implements Converter {
         return null;
     }
 
-    public Song readPlaylist()
+    public void convertToJSON(ArrayList<Song> songs)
     {
-        Playlist list = new Playlist();;
+        Gson gson = new Gson();
 
-        ArrayList<Song> showList = list.getSongs();
-        Song items = null;
+        String json = gson.toJson(songs);
 
-        for (Song item : showList)
+        try
         {
-            items = item;
+            FileWriter writer = new FileWriter("C://Users/ferdi/Documents/file.json");
+            writer.write(json);
+            writer.close();
         }
-
-        return items;
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }
