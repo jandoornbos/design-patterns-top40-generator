@@ -96,7 +96,10 @@ public class MusicPlayer
 
     public void stopPlaying()
     {
-        player.close();
+        if (player != null)
+        {
+            player.close();
+        }
     }
 
     public Song getCurrentSong()
