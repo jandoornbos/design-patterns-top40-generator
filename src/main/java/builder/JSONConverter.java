@@ -1,30 +1,20 @@
 package builder;
 
-import model.Playlist;
+import com.google.gson.Gson;
 import model.Song;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
-/**
- * Created by Ferdi on 15-3-2016.
- */
-public class JSONConverter implements Converter {
-
-
+public class JSONConverter implements Converter
+{
     public JSONConverter()
     {
 
     }
 
-    public String getOutput()
-    {
-        return null;
-    }
-
-    public void convertToJSON(ArrayList<Song> songs)
+    public void buildConverter(ArrayList<Song> songs)
     {
         Gson gson = new Gson();
 

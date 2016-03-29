@@ -16,7 +16,6 @@ public class Song {
     private String title;
     private String artist;
     private String album;
-    private int id;
 
     public Song() {}
 
@@ -32,12 +31,6 @@ public class Song {
         this.title = title;
         this.artist = artist;
         this.album = album;
-    }
-
-    @XmlAttribute
-    public int getId()
-    {
-        return id;
     }
 
     public String getFile()

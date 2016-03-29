@@ -2,41 +2,44 @@ package builder;
 
 import model.Song;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
+import java.io.File;
 import java.util.ArrayList;
-import java.io.*;
 
+/**
+ * Created by ferdi on 29-3-2016.
+ */
 public class XMLConverter implements Converter
 {
-    public static final String FILE_NAME = "songs.xml";
+    private static String FILE_NAME = "C://Users/ferdi/Documents/songs.xml";
 
     public XMLConverter()
     {
 
     }
 
-    public String getOutput()
+    public void buildConverter(ArrayList<Song> songs)
     {
-        return null;
-    }
+        Song songItems = null;
 
-    public void convertToXML(Song songs)
-    {
-        try
+        for (Song song : songs)
         {
-            JAXBContext context = JAXBContext.newInstance(Song.class);
-            Marshaller m = context.createMarshaller();
+            try
+            {
+                JAXBContext context = JAXBContext.newInstance(Song.class);
 
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+                Marshaller m = context.createMarshaller();
 
-            m.marshal(songs, new File(FILE_NAME));
+                m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+
+                m.marshal(song, new File(FILE_NAME));
+            }
+            catch (JAXBException e)
+            {
+                e.printStackTrace();
+            }
         }
-        catch (JAXBException e)
-        {
-            e.printStackTrace();
-        }
+
+
     }
 }
