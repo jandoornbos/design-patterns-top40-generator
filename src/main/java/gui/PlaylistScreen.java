@@ -4,10 +4,10 @@ import builder.XMLConverter;
 import model.Playlist;
 import model.Song;
 import builder.JSONConverter;
+import musicplayer.MusicPlayer;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PlaylistScreen extends JFrame implements AddSongInterface {
@@ -33,9 +33,12 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         setVisible(true);
 
         addButtonActions();
+        addListActions();
 
         listModel = new DefaultListModel();
         songList.setModel(listModel);
+
+        addWindowListener(new CustomWindowListener());
     }
 
     /**
@@ -98,6 +101,33 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     }
 
     /**
+     * Add list actions.
+     */
+    private void addListActions()
+    {
+
+        // When user clicks a item in the list
+        songList.addMouseListener(new MouseAdapter()
+        {
+
+            public void mouseClicked(MouseEvent e)
+            {
+                JList list = (JList) e.getSource();
+                // If item is doubled clicked
+                if (e.getClickCount() == 2)
+                {
+                    int index = list.locationToIndex(e.getPoint());
+                    Song song = currentPlaylist.getSongs().get(index);
+                    // Play the song
+                    MusicPlayer.getInstance().playSong(song);
+                }
+            }
+
+        });
+
+    }
+
+    /**
      * Fill the JList with the songs that are already in the playlist.
      */
     private void fillListWithPlaylist()
@@ -122,6 +152,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     public void songAdded(Song song)
     {
         String songString = song.getTitle() + " - " + song.getArtist();
+        this.currentPlaylist.addSong(song);
         listModel.addElement(songString);
     }
 
@@ -135,4 +166,5 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         titleLabel.setText(this.currentPlaylist.getTitle());
         fillListWithPlaylist();
     }
+
 }
