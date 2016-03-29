@@ -37,7 +37,6 @@ public class AddSongScreen extends JFrame {
         saveButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
                 String songTitle = titleTextField.getText();
                 String songArtist = artistTextField.getText();
                 String songAlbum = albumTextField.getText();
