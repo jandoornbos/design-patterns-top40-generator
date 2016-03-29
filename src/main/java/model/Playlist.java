@@ -35,6 +35,7 @@ public class Playlist implements Subject {
     }
 
     public void notifyObservers() {
+        System.out.print(this.observers);
         for (Observer observer : this.observers)
         {
             observer.update();
@@ -43,6 +44,7 @@ public class Playlist implements Subject {
 
     public void registerObserver(Observer observer)
     {
+        observer.setPlaylist(this);
         this.observers.add(observer);
     }
 

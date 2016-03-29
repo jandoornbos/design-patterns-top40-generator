@@ -1,9 +1,13 @@
 package observer;
 
+import model.Playlist;
+
 public interface Observer {
 
-    public void update();
+    void update();
 
-    public void setSubject(Subject subject);
+    void setSubject(Subject subject);
+
+    void setPlaylist(Playlist playlist);
 
 }

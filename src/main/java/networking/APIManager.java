@@ -5,6 +5,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.async.Callback;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import model.Playlist;
 
 import java.util.concurrent.Future;
 
@@ -39,9 +40,13 @@ public class APIManager
     /**
      * Upload a playlist to the webserver.
      */
-    public void postPlaylistToWebservice() {
+    public void postPlaylistToWebservice(Playlist playlist) {
+
+        // Make some JSON
+        String jsonString = "{ \"title\" : \"" + playlist.getTitle() + "\" }";
 
         Future<HttpResponse<JsonNode>> request = Unirest.post(BASE_URL + "playlist/upload")
+                .body(jsonString)
                 .asJsonAsync(new Callback<JsonNode>() {
 
                     public void completed(HttpResponse<JsonNode> httpResponse) {

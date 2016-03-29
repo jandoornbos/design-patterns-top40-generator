@@ -4,6 +4,8 @@ import datamodel.DataModel;
 import javafx.scene.chart.PieChart;
 import model.Playlist;
 import builder.JSONConverter;
+import observer.EmailObserver;
+import observer.WebserviceObserver;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -33,7 +35,17 @@ public class StartScreen extends JFrame {
         englishListButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                openPlaylistScreen(DataModel.getInstance().getEnglishPlaylist());
+
+                Playlist enPlaylist = DataModel.getInstance().getEnglishPlaylist();
+
+                // Add observers to playlist
+                WebserviceObserver wObserver = new WebserviceObserver();
+                enPlaylist.registerObserver(wObserver);
+
+                EmailObserver eObserver = new EmailObserver();
+                enPlaylist.registerObserver(eObserver);
+
+                openPlaylistScreen(enPlaylist);
             }
 
         });
@@ -41,7 +53,16 @@ public class StartScreen extends JFrame {
         dutchListButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                openPlaylistScreen(DataModel.getInstance().getDutchPlaylist());
+
+                Playlist nlPlaylist = DataModel.getInstance().getDutchPlaylist();
+
+                WebserviceObserver wObserver = new WebserviceObserver();
+                nlPlaylist.registerObserver(wObserver);
+
+                EmailObserver eObserver = new EmailObserver();
+                nlPlaylist.registerObserver(eObserver);
+
+                openPlaylistScreen(nlPlaylist);
             }
 
         });

@@ -1,12 +1,19 @@
 package observer;
 
+import model.Playlist;
+
 public class EmailObserver implements Observer {
 
     private Subject subject;
+    private Playlist playlist;
     public String name;
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    public void setPlaylist(Playlist playlist) {
+        this.playlist = playlist;
     }
 
     public void update() {

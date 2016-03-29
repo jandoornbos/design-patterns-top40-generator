@@ -18,6 +18,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     private JButton jsonExportButton;
     private JButton xmlExportButton;
     private JLabel titleLabel;
+    private JButton notifyUsersButton;
 
     private DefaultListModel listModel;
     private Playlist currentPlaylist;
@@ -78,6 +79,20 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
                 }
 
             }
+        });
+
+        // When user clicks the Notify button
+        notifyUsersButton.addActionListener(new ActionListener()
+        {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                // Notify our observers
+                if (currentPlaylist != null) {
+                    currentPlaylist.notifyObservers();
+                }
+            }
+
         });
 
     }
