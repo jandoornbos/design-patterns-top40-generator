@@ -6,6 +6,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.async.Callback;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import model.Playlist;
+import model.Song;
 
 import java.util.concurrent.Future;
 
@@ -42,22 +43,54 @@ public class APIManager
      */
     public void postPlaylistToWebservice(Playlist playlist) {
 
+        StringBuilder jsonString = new StringBuilder();
         // Make some JSON
-        String jsonString = "{ \"title\" : \"" + playlist.getTitle() + "\" }";
+        jsonString.append("{ \"title\" : \"" + playlist.getTitle() + "\", \"songs\" : [ ");
+
+        for (int i = 0; i < playlist.getSongs().size(); i++)
+        {
+
+            Song song = playlist.getSongs().get(i);
+
+            jsonString.append("{" +
+                    "\"title\" : \"" + song.getTitle() + "\"," +
+                    "\"album\" : \"" + song.getAlbum() + "\"," +
+                    "\"artist\" : \"" + song.getArtist() + "\"," +
+                    "\"url\" : \"" + song.getFile() + "\"");
+
+            if (i + 1 == playlist.getSongs().size())
+            {
+                jsonString.append("}");
+            }
+            else
+            {
+                jsonString.append("}, ");
+            }
+
+        }
+        jsonString.append("] }");
+        String string = jsonString.toString();
+        System.out.println(string);
 
         Future<HttpResponse<JsonNode>> request = Unirest.post(BASE_URL + "playlist/upload")
-                .body(jsonString)
+                .body(string)
                 .asJsonAsync(new Callback<JsonNode>() {
 
-                    public void completed(HttpResponse<JsonNode> httpResponse) {
-                        System.out.println("Playlist on server updated");
+                    public void completed(HttpResponse<JsonNode> httpResponse)
+                    {
+                        JsonNode json = httpResponse.getBody();
+                        System.out.print(httpResponse.getStatus());
+                        System.out.print(httpResponse.getStatusText());
+                        System.out.print(json.toString());
                     }
 
-                    public void failed(UnirestException e) {
+                    public void failed(UnirestException e)
+                    {
                         System.out.println("Playlist on server updating failed");
                     }
 
-                    public void cancelled() {
+                    public void cancelled()
+                    {
                         System.out.println("Upload action cancelled.");
                     }
 
