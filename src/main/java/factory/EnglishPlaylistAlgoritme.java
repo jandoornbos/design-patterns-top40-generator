@@ -1,8 +1,8 @@
 package factory;
 
-public class EnglishPlaylistAlgoritme implements PlaylistAlgoritme
+public class EnglishPlaylistAlgoritme implements Algoritme
 {
-    public void algoritmeFactory()
+    public void calculate()
     {
 
     }

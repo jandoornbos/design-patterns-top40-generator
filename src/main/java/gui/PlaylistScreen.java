@@ -1,5 +1,8 @@
 package gui;
 
+import factory.Algoritme;
+import factory.AlgoritmeFactory;
+import factory.DutchPlaylistAlgoritme;
 import model.Playlist;
 import model.Song;
 import musicplayer.MusicPlayer;
