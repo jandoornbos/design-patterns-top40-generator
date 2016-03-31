@@ -1,14 +1,8 @@
 package gui;
 
-import factory.Algoritme;
-import factory.AlgoritmeFactory;
-import factory.DutchPlaylistAlgoritme;
 import model.Playlist;
 import model.Song;
 import musicplayer.MusicPlayer;
-import builder.Converter;
-import builder.JSONConverter;
-import builder.XMLConverter;
 
 import javax.swing.*;
 import java.awt.event.*;

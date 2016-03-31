@@ -1,9 +1,21 @@
 package builder;
 
+import model.Playlist;
 import model.Song;
-import java.util.ArrayList;
 
-public interface Converter
-{
-    public void buildConverter(ArrayList<Song> songs);
+public class Converter {
+
+    PlaylistConverter builder;
+
+    public Converter(PlaylistConverter builder) {
+        this.builder = builder;
+    }
+
+    public void parsePlaylist(Playlist playlist) {
+
+        for (Song song : playlist.getSongs()) {
+            builder.convertSong(song);
+        }
+
+    }
 }
