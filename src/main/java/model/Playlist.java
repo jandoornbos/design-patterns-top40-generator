@@ -1,12 +1,14 @@
 package model;
 
+import iterator.Iterator;
+import iterator.IteratorContainer;
 import observer.Observer;
 import observer.Subject;
 
 import java.util.ArrayList;
 
 
-public class Playlist implements Subject {
+public class Playlist implements Subject, IteratorContainer {
 
     private String title;
     private ArrayList<Song> songs;
@@ -51,6 +53,46 @@ public class Playlist implements Subject {
     public void removeObserver(Observer observer)
     {
         this.observers.remove(observer);
+    }
+
+    public PlaylistIterator getIterator() {
+        return new PlaylistIterator();
+    }
+
+    private class PlaylistIterator implements Iterator {
+
+        int index;
+
+        public boolean hasNext() {
+            if (index < songs.size()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean hasPrevious() {
+            if (index > songs.size()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public Object next() {
+            if (this.hasNext()) {
+                return songs.get(index++);
+            }
+            return null;
+        }
+
+        public Object previous() {
+            if (this.hasPrevious()) {
+                return songs.get(index--);
+            }
+            return null;
+        }
+
     }
 
 }
