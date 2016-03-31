@@ -15,6 +15,9 @@ public class StartScreen extends JFrame {
     private JButton englishListButton;
     private JButton dutchListButton;
 
+    /**
+     * The start screen of the App.
+     */
     public StartScreen() {
         super("StartScreen");
 
@@ -28,6 +31,9 @@ public class StartScreen extends JFrame {
         setupButtons();
     }
 
+    /**
+     * Add some actions to the buttons.
+     */
     private void setupButtons() {
 
         englishListButton.addActionListener(new ActionListener() {
@@ -54,6 +60,7 @@ public class StartScreen extends JFrame {
 
                 Playlist nlPlaylist = DataModel.getInstance().getDutchPlaylist();
 
+                // Add observers to the playlist
                 WebserviceObserver wObserver = new WebserviceObserver();
                 nlPlaylist.registerObserver(wObserver);
 
@@ -67,6 +74,11 @@ public class StartScreen extends JFrame {
 
     }
 
+    /**
+     * Opens a playlist screen.
+     *
+     * @param playlist The playlist to open in this new screen.
+     */
     private void openPlaylistScreen(Playlist playlist) {
         PlaylistScreen playlistScreen = new PlaylistScreen();
         playlistScreen.setCurrentPlaylist(playlist);

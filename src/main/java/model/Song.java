@@ -30,41 +30,80 @@ public class Song {
         this.artist = artist;
         this.album = album;
 
+        // Generate some random numbers
         Random random = new Random();
         this.streamCount = random.nextInt(UPPER_BOUND) + 1;
         this.cdBuyCount = random.nextInt(UPPER_BOUND) + 1;
         this.itunesBuyCount = random.nextInt(UPPER_BOUND) + 1;
     }
 
+    /**
+     * Get the URL where the MP3 is hosted.
+     *
+     * @return The url.
+     */
     public String getFile()
     {
         return fileURL;
     }
 
+    /**
+     * Get the song title.
+     *
+     * @return The song title.
+     */
     public String getTitle()
     {
         return title;
     }
 
+    /**
+     * Get the song artist.
+     *
+     * @return The song artist.
+     */
     public String getArtist()
     {
         return artist;
     }
 
+    /**
+     * Get the song album.
+     *
+     * @return The song album.
+     */
     public String getAlbum()
     {
         return album;
     }
 
-    public int getStreamCount() {
+    /**
+     * Get the amount of times the song is streamed by Spotify.
+     *
+     * @return The stream count.
+     */
+    public int getStreamCount()
+    {
         return this.streamCount;
     }
 
-    public int getCdBuyCount() {
+    /**
+     * How many times is this song sold on a CD?
+     *
+     * @return The amount of sold songs on CD.
+     */
+    public int getCdBuyCount()
+    {
         return this.cdBuyCount;
     }
 
-    public int getItunesBuyCount() {
+    /**
+     * Get the amount of times the song is purchased on iTunes.
+     *
+     * @return The iTunes buy count.
+     */
+    public int getItunesBuyCount()
+    {
         return this.itunesBuyCount;
     }
 

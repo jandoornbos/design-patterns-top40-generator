@@ -6,7 +6,6 @@ import builder.JSONConverter;
 
 import factory.Algoritme;
 import factory.AlgoritmeFactory;
-import factory.EnglishPlaylistAlgoritme;
 import builder.XMLConverter;
 import model.Playlist;
 import model.Song;
@@ -14,12 +13,10 @@ import musicplayer.MusicPlayer;
 import builder.Converter;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistScreen extends JFrame implements AddSongInterface {
@@ -36,6 +33,9 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     private DefaultListModel listModel;
     private Playlist currentPlaylist;
 
+    /**
+     * The screen of the App where all the playlist magic happens.
+     */
     public PlaylistScreen() {
 
         setContentPane(rootPanel);
@@ -177,12 +177,21 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         fillListWithPlaylist();
     }
 
+    /**
+     * Get the current playlist.
+     *
+     * @return The current playlist.
+     */
     public Playlist getCurrentPlaylist()
     {
         return this.currentPlaylist;
     }
 
-    private void convertJSON() {
+    /**
+     * Convert the playlist to JSON by the builder pattern.
+     */
+    private void convertJSON()
+    {
         JSONConverter converterBuilder = new JSONConverter();
         Converter jsonReader = new Converter(converterBuilder);
         jsonReader.parsePlaylist(currentPlaylist);
@@ -190,7 +199,11 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         saveFileWithExtension("application/json", "json", converterProduct.getOutput());
     }
 
-    private void convertXML() {
+    /**
+     * Convert the playlist to XML by the builder pattern.
+     */
+    private void convertXML()
+    {
         XMLConverter converterBuilder = new XMLConverter();
         Converter xmlReader = new Converter(converterBuilder);
         xmlReader.parsePlaylist(currentPlaylist);
@@ -198,6 +211,13 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         saveFileWithExtension("application/xml", "xml", converterProduct.getOutput());
     }
 
+    /**
+     * Save the output from the builder pattern to disk.
+     *
+     * @param extensionDescription A description of the file extension.
+     * @param extension The file extension.
+     * @param content The actual content for the file.
+     */
     private void saveFileWithExtension(String extensionDescription, String extension, String content) {
 
         JFileChooser fileChooser = new JFileChooser();
@@ -205,24 +225,29 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         fileChooser.setSelectedFile(new File("playlist." + extension));
         fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showSaveDialog(this);
-        if (returnValue == JFileChooser.APPROVE_OPTION) {
-
+        if (returnValue == JFileChooser.APPROVE_OPTION)
+        {
             String path = fileChooser.getSelectedFile().getPath();
             try
             {
                 PrintWriter printWriter = new PrintWriter(path, "UTF-8");
                 printWriter.write(content);
                 printWriter.close();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
-
         }
     }
 
+    /**
+     * Generate a top 40 by using the factory pattern.
+     */
     private void generateTop40() {
 
         String algorithmToChoose;
+        // Choose the right algorithm depending on the playlist title
         if (this.currentPlaylist.getTitle() == "Dutch")
         {
             algorithmToChoose = "DutchPlaylistAlgoritme";
@@ -235,7 +260,9 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         AlgoritmeFactory factory = new AlgoritmeFactory();
         Algoritme algorithm = factory.getAlgoritme(algorithmToChoose);
 
+        // Do some magic calculations
         List<Song> top40 = algorithm.calculate(this.currentPlaylist);
+        // Open a new screen with the generate top 40
         Top40Screen screen = new Top40Screen(top40);
 
     }

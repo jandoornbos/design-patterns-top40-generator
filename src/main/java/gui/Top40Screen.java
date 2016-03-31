@@ -16,6 +16,11 @@ public class Top40Screen extends JFrame {
 
     private List<Song> top40List;
 
+    /**
+     * Create a Top 40 screen that shows the top 40 list.
+     *
+     * @param list The list to display.
+     */
     public Top40Screen(List<Song> list)
     {
         super("Top 40 Screen");
@@ -33,12 +38,16 @@ public class Top40Screen extends JFrame {
         setupTable();
     }
 
+    /**
+     * Add some actions to the buttons.
+     */
     private void addButtonActions()
     {
         this.closeButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e)
             {
+                // Hide the window and dispose it
                 setVisible(false);
                 dispose();
             }
@@ -46,14 +55,20 @@ public class Top40Screen extends JFrame {
         });
     }
 
+    /**
+     * Setup our Top 40 table.
+     */
     private void setupTable()
     {
+        // Make the columns
         String[] columns = new String[] {
             "Number", "Artist", "Title", "Stream Count", "CD Count", "iTunes Count"
         };
 
+        // Make some table model
         DefaultTableModel tableModel = new DefaultTableModel(columns, 0);
 
+        // Loop through the songs and add them to the table
         for (int i = 1; i <= this.top40List.size(); i++)
         {
             Song song = this.top40List.get(i-1);
@@ -63,6 +78,7 @@ public class Top40Screen extends JFrame {
             tableModel.addRow(data);
         }
 
+        // Fill our table with our model
         table.setModel(tableModel);
     }
 

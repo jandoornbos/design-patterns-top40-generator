@@ -17,8 +17,13 @@ public class AddSongScreen extends JFrame {
 
     private AddSongInterface addSongInterface;
 
-    public AddSongScreen(AddSongInterface notifier) {
-
+    /**
+     * Add a song to the playlist.
+     *
+     * @param notifier An interface that called this screen.
+     */
+    public AddSongScreen(AddSongInterface notifier)
+    {
         addSongInterface = notifier;
 
         setContentPane(rootPanel);
@@ -29,27 +34,31 @@ public class AddSongScreen extends JFrame {
         setVisible(true);
 
         addButtonActions();
-
     }
 
-    public void addButtonActions() {
-
-        saveButton.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
+    /**
+     * Add some action to the buttons.
+     */
+    public void addButtonActions()
+    {
+        saveButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                // Generate a new song
                 String songTitle = titleTextField.getText();
                 String songArtist = artistTextField.getText();
                 String songAlbum = albumTextField.getText();
                 String songFileUrl = fileUrlTextField.getText();
 
                 Song song = new Song(songFileUrl, songTitle, songArtist, songAlbum);
+                // Call the screen who opened this screen, so it knows a new song is created
                 addSongInterface.songAdded(song);
+                // Dispose this screen
                 setVisible(false);
                 dispose();
             }
-
         });
-
     }
 
 }

@@ -16,6 +16,9 @@ public class EmailObserver implements Observer {
         this.playlist = playlist;
     }
 
+    /**
+     * E-mail our users that there is a new playlist available.
+     */
     public void update() {
         // Send e-mails
     }

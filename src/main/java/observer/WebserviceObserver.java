@@ -17,6 +17,9 @@ public class WebserviceObserver implements Observer {
         this.playlist = playlist;
     }
 
+    /**
+     * Update our playlist on the Webservice
+     */
     public void update() {
         APIManager.getInstance().postPlaylistToWebservice(this.playlist);
     }

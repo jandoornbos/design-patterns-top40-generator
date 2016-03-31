@@ -21,6 +21,9 @@ public class MusicPlayer
         return sharedInstance;
     }
 
+    /**
+     * Constructor
+     */
     private MusicPlayer()
     {
     }
@@ -32,7 +35,7 @@ public class MusicPlayer
      */
     public void playSong(final Song song)
     {
-
+        // If the player is already playing, stop it
         if (playerThread != null)
         {
             playerThread.interrupt();
@@ -67,9 +70,11 @@ public class MusicPlayer
         Boolean playSong = false;
         try
         {
+            // Try opening our song from the internet
             URLConnection urlConnection = new URL(song.getFile()).openConnection();
             urlConnection.connect();
 
+            // Start playing
             player = new Player(urlConnection.getInputStream());
             playSong = true;
         }
@@ -94,6 +99,9 @@ public class MusicPlayer
         }
     }
 
+    /**
+     * Stop playing music.
+     */
     public void stopPlaying()
     {
         if (player != null)
@@ -102,6 +110,11 @@ public class MusicPlayer
         }
     }
 
+    /**
+     * Get the current song.
+     *
+     * @return song The song that is currently playing.
+     */
     public Song getCurrentSong()
     {
         return this.currentSong;

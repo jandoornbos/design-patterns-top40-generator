@@ -35,11 +35,16 @@ public class APIManager
      */
     private APIManager()
     {
-
     }
 
     /**
      * Upload a playlist to the webserver.
+     * If succesfully you can see the playlist on a webpage.
+     *
+     * The consoles prints the {id} of the playlist. URL:
+     * http://top40.doornbosagrait.tk/playlist/show/{id}
+     *
+     * @param playlist The playlist to upload
      */
     public void postPlaylistToWebservice(Playlist playlist) {
 
@@ -47,6 +52,7 @@ public class APIManager
         // Make some JSON
         jsonString.append("{ \"title\" : \"" + playlist.getTitle() + "\", \"songs\" : [ ");
 
+        // Loop through the songs
         for (int i = 0; i < playlist.getSongs().size(); i++)
         {
 
@@ -58,6 +64,7 @@ public class APIManager
                     "\"artist\" : \"" + song.getArtist() + "\"," +
                     "\"url\" : \"" + song.getFile() + "\"");
 
+            // If it is our last song, close our JSON array
             if (i + 1 == playlist.getSongs().size())
             {
                 jsonString.append("}");
@@ -72,6 +79,7 @@ public class APIManager
         String string = jsonString.toString();
         System.out.println(string);
 
+        // Make the request
         Future<HttpResponse<JsonNode>> request = Unirest.post(BASE_URL + "playlist/upload")
                 .body(string)
                 .asJsonAsync(new Callback<JsonNode>() {
@@ -79,8 +87,6 @@ public class APIManager
                     public void completed(HttpResponse<JsonNode> httpResponse)
                     {
                         JsonNode json = httpResponse.getBody();
-                        System.out.print(httpResponse.getStatus());
-                        System.out.print(httpResponse.getStatusText());
                         System.out.print(json.toString());
                     }
 
