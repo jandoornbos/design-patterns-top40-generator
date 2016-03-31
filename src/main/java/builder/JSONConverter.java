@@ -19,11 +19,11 @@ public class JSONConverter extends PlaylistConverter {
         String artist = "\"artist\"";
         String album = "\"album\"";
 
-        this.product.appendString("[{ " + fileURL + ":" +
-        song.getFile() + "," + title + ":" +
-        song.getTitle() + "," + artist + ":" +
-        song.getArtist() + "," + album + ":" +
-        song.getAlbum());
+        this.product.appendString("[{ " + fileURL + ":\"" +
+        song.getFile() + "\"," + title + ":\"" +
+        song.getTitle() + "\"," + artist + ":\"" +
+        song.getArtist() + "\"," + album + ":\"" +
+        song.getAlbum() + "\" }]");
     }
 
     public ConverterProduct getResult() {

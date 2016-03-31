@@ -3,6 +3,7 @@ package gui;
 
 import builder.ConverterProduct;
 import builder.JSONConverter;
+import factory.EnglishPlaylistAlgoritme;
 import model.Playlist;
 import model.Song;
 import musicplayer.MusicPlayer;
@@ -62,6 +63,9 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         {
             public void actionPerformed(ActionEvent e)
             {
+                EnglishPlaylistAlgoritme englishPlaylistAlgoritme = new EnglishPlaylistAlgoritme();
+                englishPlaylistAlgoritme.calculate(currentPlaylist);
+
                 JSONConverter converterBuilder = new JSONConverter();
                 Converter jsonReader = new Converter(converterBuilder);
                 jsonReader.parsePlaylist(currentPlaylist);
@@ -159,6 +163,11 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         this.currentPlaylist = currentPlaylist;
         titleLabel.setText(this.currentPlaylist.getTitle());
         fillListWithPlaylist();
+    }
+
+    public Playlist getCurrentPlaylist()
+    {
+        return this.currentPlaylist;
     }
 
 }
