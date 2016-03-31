@@ -1,21 +1,19 @@
 package model;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
+import java.util.Random;
 
-@XmlRootElement(name = "Song")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"fileURL", "title", "artist", "album"})
 public class Song {
+
     private String fileURL;
     private String title;
     private String artist;
     private String album;
+
+    private int streamCount;
+    private int cdBuyCount;
+    private int itunesBuyCount;
+
+    private static int UPPER_BOUND = 1000000;
 
     public Song() {}
 
@@ -31,6 +29,11 @@ public class Song {
         this.title = title;
         this.artist = artist;
         this.album = album;
+
+        Random random = new Random();
+        this.streamCount = random.nextInt(UPPER_BOUND) + 1;
+        this.cdBuyCount = random.nextInt(UPPER_BOUND) + 1;
+        this.itunesBuyCount = random.nextInt(UPPER_BOUND) + 1;
     }
 
     public String getFile()
@@ -52,4 +55,17 @@ public class Song {
     {
         return album;
     }
+
+    public int getStreamCount() {
+        return this.streamCount;
+    }
+
+    public int getCdBuyCount() {
+        return this.cdBuyCount;
+    }
+
+    public int getItunesBuyCount() {
+        return this.itunesBuyCount;
+    }
+
 }
