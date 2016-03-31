@@ -27,7 +27,7 @@ public class XMLConverter extends PlaylistConverter
     }
 
     @Override
-    public ConverterProduct getResult(ConverterProduct product)
+    public ConverterProduct getResult()
     {
         this.product.appendString("</songs>");
         return this.product;

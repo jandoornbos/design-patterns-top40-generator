@@ -6,11 +6,24 @@ public class JSONConverter extends PlaylistConverter {
 
     private ConverterProduct product;
 
+    public JSONConverter()
+    {
+        this.product = new ConverterProduct();
+    }
+
     @Override
-    void convertSong(Song song) {
+    public void convertSong(Song song)
+    {
+        String fileURL = "\"fileURL\"";
+        String title = "\"title\"";
+        String artist = "\"artist\"";
+        String album = "\"album\"";
 
-        this.product.appendString("Hihi liedje" + song.getTitle());
-
+        this.product.appendString("[{ " + fileURL + ":" +
+        song.getFile() + "," + title + ":" +
+        song.getTitle() + "," + artist + ":" +
+        song.getArtist() + "," + album + ":" +
+        song.getAlbum());
     }
 
     public ConverterProduct getResult() {

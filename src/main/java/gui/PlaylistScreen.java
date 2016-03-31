@@ -1,8 +1,12 @@
 package gui;
 
+
+import builder.ConverterProduct;
+import builder.JSONConverter;
 import model.Playlist;
 import model.Song;
 import musicplayer.MusicPlayer;
+import builder.Converter;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -58,9 +62,11 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         {
             public void actionPerformed(ActionEvent e)
             {
-                ArrayList<Song> getCurrentSongs = currentPlaylist.getSongs();
-                Converter jsonConverter = new JSONConverter();
-                jsonConverter.buildConverter(getCurrentSongs);
+                JSONConverter converterBuilder = new JSONConverter();
+                Converter jsonReader = new Converter(converterBuilder);
+                jsonReader.parsePlaylist(currentPlaylist);
+                ConverterProduct converterProduct = converterBuilder.getResult();
+                System.out.println(converterProduct.getOutput());
             }
         });
 
@@ -68,9 +74,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         {
             public void actionPerformed(ActionEvent e)
             {
-                ArrayList<Song> getCurrentSongs = currentPlaylist.getSongs();
-                Converter xmlConverter = new XMLConverter();
-                xmlConverter.buildConverter(getCurrentSongs);
+
             }
         });
 

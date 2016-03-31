@@ -4,8 +4,13 @@ public class ConverterProduct {
 
     private StringBuilder output;
 
-    public void appendString(String string) {
+    public ConverterProduct()
+    {
+        output = new StringBuilder();
+    }
 
+    public void appendString(String string) {
+        output.append(string);
     }
 
     public String getOutput() {
