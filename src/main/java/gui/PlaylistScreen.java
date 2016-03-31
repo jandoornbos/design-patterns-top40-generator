@@ -3,13 +3,18 @@ package gui;
 
 import builder.ConverterProduct;
 import builder.JSONConverter;
+import builder.XMLConverter;
 import model.Playlist;
 import model.Song;
 import musicplayer.MusicPlayer;
 import builder.Converter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class PlaylistScreen extends JFrame implements AddSongInterface {
@@ -62,11 +67,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         {
             public void actionPerformed(ActionEvent e)
             {
-                JSONConverter converterBuilder = new JSONConverter();
-                Converter jsonReader = new Converter(converterBuilder);
-                jsonReader.parsePlaylist(currentPlaylist);
-                ConverterProduct converterProduct = converterBuilder.getResult();
-                System.out.println(converterProduct.getOutput());
+                convertJSON();
             }
         });
 
@@ -74,7 +75,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         {
             public void actionPerformed(ActionEvent e)
             {
-
+                convertXML();
             }
         });
 
@@ -159,6 +160,45 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
         this.currentPlaylist = currentPlaylist;
         titleLabel.setText(this.currentPlaylist.getTitle());
         fillListWithPlaylist();
+    }
+
+    private void convertJSON() {
+        JSONConverter converterBuilder = new JSONConverter();
+        Converter jsonReader = new Converter(converterBuilder);
+        jsonReader.parsePlaylist(currentPlaylist);
+        ConverterProduct converterProduct = converterBuilder.getResult();
+        saveFileWithExtension("application/json", "json", converterProduct.getOutput());
+    }
+
+    private void convertXML() {
+        XMLConverter converterBuilder = new XMLConverter();
+        Converter xmlReader = new Converter(converterBuilder);
+        xmlReader.parsePlaylist(currentPlaylist);
+        ConverterProduct converterProduct = converterBuilder.getResult();
+        saveFileWithExtension("application/xml", "xml", converterProduct.getOutput());
+    }
+
+    private void saveFileWithExtension(String extensionDescription, String extension, String content) {
+
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(extensionDescription, extension);
+        fileChooser.setSelectedFile(new File("playlist." + extension));
+        fileChooser.setFileFilter(filter);
+        int returnValue = fileChooser.showSaveDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+
+            String path = fileChooser.getSelectedFile().getPath();
+            try
+            {
+                PrintWriter printWriter = new PrintWriter(path, "UTF-8");
+                printWriter.write(content);
+                printWriter.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
 }
