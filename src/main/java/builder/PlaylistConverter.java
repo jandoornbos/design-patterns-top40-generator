@@ -4,6 +4,7 @@ import model.Song;
 
 public abstract class PlaylistConverter {
 
-    abstract void convertSong(Song song);
+    public abstract void convertSong(Song song);
+    public abstract ConverterProduct getResult(ConverterProduct product);
 
 }
