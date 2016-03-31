@@ -4,6 +4,8 @@ package gui;
 import builder.ConverterProduct;
 import builder.JSONConverter;
 
+import factory.Algoritme;
+import factory.AlgoritmeFactory;
 import factory.EnglishPlaylistAlgoritme;
 import builder.XMLConverter;
 import model.Playlist;
@@ -18,6 +20,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PlaylistScreen extends JFrame implements AddSongInterface {
 
@@ -28,6 +31,7 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
     private JButton xmlExportButton;
     private JLabel titleLabel;
     private JButton notifyUsersButton;
+    private JButton generateTop40Button;
 
     private DefaultListModel listModel;
     private Playlist currentPlaylist;
@@ -91,6 +95,15 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
                 if (currentPlaylist != null) {
                     currentPlaylist.notifyObservers();
                 }
+            }
+
+        });
+
+        generateTop40Button.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e)
+            {
+                generateTop40();
             }
 
         });
@@ -205,6 +218,26 @@ public class PlaylistScreen extends JFrame implements AddSongInterface {
             }
 
         }
+    }
+
+    private void generateTop40() {
+
+        String algorithmToChoose;
+        if (this.currentPlaylist.getTitle() == "Dutch")
+        {
+            algorithmToChoose = "DutchPlaylistAlgoritme";
+        }
+        else
+        {
+            algorithmToChoose = "EnglishPlaylistAlgoritme";
+        }
+
+        AlgoritmeFactory factory = new AlgoritmeFactory();
+        Algoritme algorithm = factory.getAlgoritme(algorithmToChoose);
+
+        List<Song> top40 = algorithm.calculate(this.currentPlaylist);
+        Top40Screen screen = new Top40Screen(top40);
+
     }
 
 }

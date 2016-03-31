@@ -68,4 +68,8 @@ public class Song {
         return this.itunesBuyCount;
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%d\t%d\t%d", getArtist(), getTitle(), getStreamCount(), getCdBuyCount(), getItunesBuyCount());
+    }
 }

@@ -1,6 +1,5 @@
 package factory;
 
-import model.Playlist;
 
 public class AlgoritmeFactory
 {

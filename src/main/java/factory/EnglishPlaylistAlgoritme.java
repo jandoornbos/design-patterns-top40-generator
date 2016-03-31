@@ -13,17 +13,10 @@ import java.util.List;
 
 public class EnglishPlaylistAlgoritme implements Algoritme
 {
-    private Playlist playlist;
-    private PlaylistScreen playlistScreen;
 
-    public void calculate(Playlist playlist)
+    public List<Song> calculate(Playlist playlist)
     {
         List<Song> songsInList = playlist.getSongs();
-
-        for (Song song : songsInList)
-        {
-            System.out.println(song.getArtist() + " " +song.getCdBuyCount() + " " + song.getItunesBuyCount());
-        }
 
         Collections.sort(songsInList, new SongChainedComparator(
                 new CDBuyCountComparator(),
@@ -32,9 +25,8 @@ public class EnglishPlaylistAlgoritme implements Algoritme
 
         Collections.reverse(songsInList);
 
-        for (Song song : songsInList)
-        {
-            System.out.println(song.getArtist() + " " + song.getCdBuyCount() + " " + song.getItunesBuyCount());
-        }
+        return songsInList;
+
     }
+
 }

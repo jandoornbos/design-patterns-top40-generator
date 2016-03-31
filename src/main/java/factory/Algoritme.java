@@ -1,8 +1,11 @@
 package factory;
 
 import model.Playlist;
+import model.Song;
+
+import java.util.List;
 
 public interface Algoritme
 {
-    public void calculate(Playlist playlist);
+    List<Song> calculate(Playlist playlist);
 }
